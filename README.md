@@ -1,1 +1,0 @@
-This is a API to support a Beat! app.
