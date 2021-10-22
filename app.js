@@ -18,6 +18,10 @@ const getLyrics = async (music) => {
 
 // `https://www.letras.mus.br/?q=${music}` 
 
+app.get('/', (req, res) => {
+    res.send('<h1>Welcome to my API!</h1>')
+})
+
 app.get('/song/:title', async function(req, res) {
     const lyrics = await getLyrics(req.params.title)
     await res.json({
