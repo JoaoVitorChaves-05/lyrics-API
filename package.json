@@ -1,0 +1,23 @@
+{
+  "name": "lyrics-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoaoVitorChaves-05/lyrics-API.git"
+  },
+  "author": "joao-vitor-chaves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoaoVitorChaves-05/lyrics-API/issues"
+  },
+  "homepage": "https://github.com/JoaoVitorChaves-05/lyrics-API#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "puppeteer": "^10.4.0"
+  }
+}
