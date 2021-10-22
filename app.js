@@ -3,6 +3,8 @@ const app = express();
 
 const puppeteer = require('puppeteer');
 
+const PORT = process.env.PORT || 3000
+
 const getLyrics = async (music) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -29,4 +31,4 @@ app.get('/song/:title', async function(req, res) {
     })
 })
 
-app.listen(3000)
+app.listen(PORT)
