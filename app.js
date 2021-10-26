@@ -9,13 +9,18 @@ const getLyrics = async (music) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(`https://www.letras.mus.br/?q=${music}`);
+    await page.waitForSelector('#___gcse_0 > div > div > div > div.gsc-wrapper > div.gsc-resultsbox-visible > div > div > div.gsc-expansionArea > div:nth-child(1) > div.gs-webResult.gs-result > div.gsc-thumbnail-inside > div > a')
     await page.click("#___gcse_0 > div > div > div > div.gsc-wrapper > div.gsc-resultsbox-visible > div > div > div.gsc-expansionArea > div:nth-child(1) > div.gs-webResult.gs-result > div.gsc-thumbnail-inside > div > a")
-
-    const lyrics = await page.evaluate(() => {
-        return document.getElementsByClassName('cnt-letra p402_premium')[0].innerHTML;
-    });
-    await browser.close();
-    return lyrics
+    
+    await page.waitForSelector("#js-lyric-cnt > article > div.cnt-letra-trad.g-pr.g-sp > div.cnt-letra.p402_premium")
+    const nodes = await page.evaluate(() => {
+        const elements = document.getElementsByClassName('cnt-letra p402_premium')
+        
+        return elements[0].outerText
+    })
+    console.log(nodes)
+    browser.close()
+    return nodes
 }
 
 // `https://www.letras.mus.br/?q=${music}` 
