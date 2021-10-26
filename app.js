@@ -6,7 +6,10 @@ const puppeteer = require('puppeteer');
 const PORT = process.env.PORT || 3000
 
 const getLyrics = async (music, res) => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ["--no-sandbox"]
+    });
     const page = await browser.newPage();
     await page.goto(`https://www.letras.mus.br/?q=${music}`);
     await page.waitForSelector('#___gcse_0 > div > div > div > div.gsc-wrapper > div.gsc-resultsbox-visible > div > div > div.gsc-expansionArea > div:nth-child(1) > div.gs-webResult.gs-result > div.gsc-thumbnail-inside > div > a')
