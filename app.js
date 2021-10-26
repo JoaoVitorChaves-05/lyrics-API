@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
 
 const PORT = process.env.PORT || 3000
 
-const getLyrics = async (music) => {
+const getLyrics = async (music, res) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(`https://www.letras.mus.br/?q=${music}`);
@@ -20,20 +20,15 @@ const getLyrics = async (music) => {
     })
     console.log(nodes)
     browser.close()
-    return nodes
+    await res.json({song: nodes})
 }
-
-// `https://www.letras.mus.br/?q=${music}` 
 
 app.get('/', (req, res) => {
     res.send('<h1>Welcome to my API!</h1>')
 })
 
-app.get('/song/:title', async function(req, res) {
-    const lyrics = await getLyrics(req.params.title)
-    await res.json({
-        song: lyrics,
-    })
+app.get('/song/:title', function(req, res) {
+    getLyrics(req.params.title, res)
 })
 
 app.listen(PORT)
